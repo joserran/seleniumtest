@@ -46,7 +46,7 @@ public class GmailSignInTest{
         EmailHomePage emailHomePage = signInPage.clickSignIn(driver);
 
         //6. verify user signed in
-        Assert.assertTrue("Inbox should exist", emailHomePage.isElementExist(driver));
+        Assert.assertTrue("Inbox should exist", emailHomePage.isInboxExist(driver));
 
         //7. sign out
         SignInPage afterSignOut = EmailHomePage.signOut(driver);
@@ -77,7 +77,7 @@ public class GmailSignInTest{
         //The first argument will be displayed if the 2nd argument does not assert to true (false)
         //the tagname <a> denotes linkage
         //2 elements (WebDriver driver, long timeOutInSeconds)
-        Assert.assertTrue("Inbox should exist", emailHomePage.isElementExist(driver));
+        Assert.assertTrue("Inbox should exist", emailHomePage.isInboxExist(driver));
 
         //2. Click compose
         emailHomePage.clickCompose(driver);
