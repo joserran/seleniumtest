@@ -61,7 +61,6 @@ public class SignInPage
         WebElement passwordTextbox = driver.findElement(By.id("Passwd"));
         passwordTextbox.clear();
         passwordTextbox.sendKeys(accessArgs[1]);
-        System.out.println(accessArgs[1]);
     }
 
     public EmailHomePage clickSignIn(WebDriver driver) {

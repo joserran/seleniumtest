@@ -27,4 +27,51 @@ public class EmailHomePage {
     public boolean isElementExist(WebDriver driver) {
         return driver.findElements(By.partialLinkText("Inbox")).size() > 0;
     }
+
+    public void clickCompose(WebDriver driver) {
+        WebElement composeButton = driver.findElement(By.cssSelector("div[role='button'][gh='cm']"));
+        composeButton.click();
+    }
+
+    public void fillInRecipient(WebDriver driver, String recipientName) {
+        WebDriverWait wait = new WebDriverWait(driver, 30);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("textarea[name='to']")));
+        //wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("a[class='gb_b gb_Qa gb_R gb_Ma']")));
+        WebElement toInputTextArea = driver.findElement(By.cssSelector("textarea[name='to']"));
+        toInputTextArea.clear();
+        toInputTextArea.sendKeys(recipientName);
+    }
+
+    public void fillInSubject(WebDriver driver, String subjectText) {
+        WebElement subjectInputBox = driver.findElement(By.cssSelector("input[name='subjectbox']"));
+        subjectInputBox.clear();
+        subjectInputBox.sendKeys(subjectText);
+    }
+
+    public void fillInEmailBody(WebDriver driver, String emailBodyText) {
+        WebElement bodyTextArea = driver.findElement(By.cssSelector("div[role='textbox']"));
+        bodyTextArea.clear();
+        bodyTextArea.sendKeys(emailBodyText);
+    }
+
+    public void clickSendEmail(WebDriver driver) {
+        WebElement sendEmailButton = driver.findElement(By.cssSelector("div[aria-label*='Send']"));
+        sendEmailButton.click();
+    }
+
+    public void clickInboxWithNewEmail(WebDriver driver) {
+        WebDriverWait wait = new WebDriverWait(driver, 30);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.partialLinkText("Inbox")));
+        WebElement inboxButton = driver.findElement(By.partialLinkText("Inbox"));
+        inboxButton.click();
+    }
+
+    public EmailViewPage clickNewEmail(WebDriver driver) {
+        WebDriverWait wait = new WebDriverWait(driver, 30);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div[class='y6'] span[id] b")));
+        WebElement newEmail = driver.findElement(By.cssSelector("div[class='y6'] span[id] b"));
+        newEmail.click();
+
+        return PageFactory.initElements(driver, EmailViewPage.class);
+    }
 }
