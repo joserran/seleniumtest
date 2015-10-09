@@ -1,14 +1,17 @@
 //location of file on pc C:\Users\joserran\gmail-webui-test-selenium
 
+import com.appsenseca.categories.Critical;
+import com.appsenseca.categories.Major;
 import com.appsenseca.pageobjects.EmailHomePage;
 import com.appsenseca.pageobjects.EmailViewPage;
 import com.appsenseca.pageobjects.SignInPage;
 import com.appsenseca.util.WebUtil;
 import com.appsenseca.util.WebUtil;
 import com.gargoylesoftware.htmlunit.util.WebClientUtils;
-import com.sun.xml.internal.ws.model.WrapperBeanGenerator;
+//import com.sun.xml.internal.ws.model.WrapperBeanGenerator;
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -24,6 +27,8 @@ import java.util.Date;
 public class GmailSignInTest{
     WebDriver driver = new FirefoxDriver();
     WebDriverWait wait = new WebDriverWait(driver, 30);
+
+    @Category(Critical.class)
     @Test
     public void gmailLoginShouldBeSuccessful() throws InterruptedException {
 
@@ -53,8 +58,11 @@ public class GmailSignInTest{
 
         // 8.verify user did sign out
         Assert.assertTrue("signIn button should exist", signInPage.isSignInButtonExist(driver));
+        driver.quit();
+
     }
 
+    @Category({Major.class})
     @Test
     public void gmailSendAndReceiveEmail() throws InterruptedException{
 
@@ -93,14 +101,16 @@ public class GmailSignInTest{
         //4. Fill in subject
         final String subjectText = "Gmail Send Email Test";
         emailHomePage.fillInSubject(driver, subjectText);
-
+        System.out.println("Filled in subject");
 
         //5. Fill in email body
         final String emailBodyText = "Hello Testers Good Morning";
         emailHomePage.fillInEmailBody(driver, emailBodyText);
+        System.out.println("Filled in body");
 
         //6. Click send
         emailHomePage.clickSendEmail(driver);
+        System.out.println("Clicked send");
 
         //7. Click inbox again
         emailHomePage.clickInboxWithNewEmail(driver);
@@ -121,6 +131,7 @@ public class GmailSignInTest{
 
         //10. Sign out
         emailHomePage.signOut(driver);
+        driver.quit();
     }
 
 }

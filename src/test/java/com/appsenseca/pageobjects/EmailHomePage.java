@@ -44,10 +44,12 @@ public class EmailHomePage {
     }
 
     public void fillInSubject(WebDriver driver, String subjectText) {
+        WebUtil.waitForElementVisible(driver, By.cssSelector("input[name='subjectbox']"));
         WebUtil.clearAndSendKeys(driver, By.cssSelector("input[name='subjectbox']"), subjectText);
     }
 
     public void fillInEmailBody(WebDriver driver, String emailBodyText) {
+        WebUtil.waitForElementVisible(driver, By.cssSelector("div[role='textbox']"));
         WebUtil.clearAndSendKeys(driver, By.cssSelector("div[role='textbox']"), emailBodyText);
     }
 
